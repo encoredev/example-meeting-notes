@@ -100,7 +100,7 @@ const CoverSelector: FC<{
                       </div>
                     </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                      <div className="relative mb-5 w-full">
+                      <div className="relative mb-3 w-full">
                         <input
                           type="text"
                           placeholder="nature"
@@ -119,23 +119,31 @@ const CoverSelector: FC<{
                         </span>
                       )}
                       {response && !isLoading && (
-                        <div className="grid grid-cols-2 gap-2">
-                          {response.photos.map((photo) => (
-                            <div
-                              key={photo.id}
-                              className="pb-3/4 relative h-24 w-full cursor-pointer overflow-hidden hover:opacity-70"
-                              onClick={() => {
-                                setOpen(false);
-                                setCoverImage(photo.src.large2x);
-                              }}
-                            >
-                              <img
-                                src={photo.src.medium}
-                                className="absolute inset-0 h-full w-full object-cover"
-                                alt={photo.alt}
-                              />
-                            </div>
-                          ))}
+                        <div className="space-y-3">
+                          <span className="text-sm">
+                            Photos provided by{" "}
+                            <a href="https://pexels.com" className="underline">
+                              Pexels
+                            </a>
+                          </span>
+                          <div className="grid grid-cols-2 gap-2">
+                            {response.photos.map((photo) => (
+                              <div
+                                key={photo.id}
+                                className="pb-3/4 relative h-24 w-full cursor-pointer overflow-hidden hover:opacity-70"
+                                onClick={() => {
+                                  setOpen(false);
+                                  setCoverImage(photo.src.landscape);
+                                }}
+                              >
+                                <img
+                                  src={photo.src.medium}
+                                  className="absolute inset-0 h-full w-full object-cover"
+                                  alt={photo.alt}
+                                />
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
                     </div>

@@ -12,32 +12,14 @@ var secrets struct {
 
 // Object that mirrors the response from the Pexels API.
 type SearchResponse struct {
-	TotalResults int `json:"total_results"`
-	Page         int `json:"page"`
-	PerPage      int `json:"per_page"`
-	Photos       []struct {
-		Id              int    `json:"id"`
-		Width           int    `json:"width"`
-		Height          int    `json:"height"`
-		Url             string `json:"url"`
-		Photographer    string `json:"photographer"`
-		PhotographerUrl string `json:"photographer_url"`
-		PhotographerId  int    `json:"photographer_id"`
-		AvgColor        string `json:"avg_color"`
-		Src             struct {
-			Original  string `json:"original"`
-			Large2X   string `json:"large2x"`
-			Large     string `json:"large"`
+	Photos []struct {
+		Id  int `json:"id"`
+		Src struct {
 			Medium    string `json:"medium"`
-			Small     string `json:"small"`
-			Portrait  string `json:"portrait"`
 			Landscape string `json:"landscape"`
-			Tiny      string `json:"tiny"`
 		} `json:"src"`
-		Liked bool   `json:"liked"`
-		Alt   string `json:"alt"`
+		Alt string `json:"alt"`
 	} `json:"photos"`
-	NextPage string `json:"next_page"`
 }
 
 //encore:api public method=GET path=/images/:query

@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "generate_request_client:staging": "encore gen client meeting-notes-8ami --output=./src/client.ts --env=staging",
     "generate_request_client:local": "encore gen client meeting-notes-8ami --output=./src/client.ts --env=local"
