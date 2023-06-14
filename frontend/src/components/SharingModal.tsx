@@ -2,6 +2,9 @@ import { FC, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Check } from "@phosphor-icons/react";
 
+/**
+ * Modal that shows the user the link for their note.
+ */
 const SharingModal: FC<{
   open: boolean;
   setOpen: (isOpen: boolean) => void;

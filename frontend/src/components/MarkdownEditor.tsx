@@ -19,13 +19,16 @@ After saving the document you will get a link that you can share.
 
 `;
 
+/**
+ * WYSIWYG markdown editor that uses Milkdown.
+ * Read more about Milkdown (The WYSIWYG Markdown Editor Framework) here: https://milkdown.dev/
+ */
 const MarkdownEditor: FC<{
   content: string | null;
   setContent: (text: string) => void;
 }> = ({ content, setContent }) => {
   useEditor((root) =>
     Editor.make()
-      // .config(nord)
       .config((ctx) => {
         ctx.set(rootCtx, root);
         ctx.set(defaultValueCtx, content || defaultContent);

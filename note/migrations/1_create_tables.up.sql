@@ -1,5 +1,5 @@
 CREATE TABLE note (
 	id TEXT PRIMARY KEY,
-	text TEXT NOT NULL,
+	text TEXT,
 	cover_url TEXT
 );

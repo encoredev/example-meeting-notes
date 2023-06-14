@@ -7,14 +7,20 @@ import CoverSelector from "./CoverSelector.tsx";
 import MarkdownEditor from "./MarkdownEditor.tsx";
 import SharingModal from "./SharingModal.tsx";
 
-const getClient = () => {
+/**
+ * Returns the Encore request client for either the local or staging environment.
+ * If we are running the frontend locally (dev mode) we assume that our Encore backend is also running locally
+ * and make requests to that, otherwise we use the staging client.
+ */
+const getRequestClient = () => {
   return import.meta.env.DEV
     ? new Client(Local)
     : new Client(Environment("staging"));
 };
 
 function App() {
-  const client = getClient();
+  // Get the request client to make requests to the Encore backend
+  const client = getRequestClient();
 
   const urlParams = new URLSearchParams(window.location.search);
   const queryParamID = urlParams.get("id");
@@ -28,12 +34,13 @@ function App() {
 
   useEffect(() => {
     const fetchNote = async () => {
-      // Ff we do not have an id then we are creating a new note, nothing needs to be fetched
+      // If we do not have an id then we are creating a new note, nothing needs to be fetched
       if (!queryParamID) {
         setIsLoading(false);
         return;
       }
       try {
+        // Fetch the note from the backend
         const response = await client.note.Get(queryParamID);
         setCoverImage(response.cover_url || "");
         setContent(response.text || "");
@@ -47,9 +54,11 @@ function App() {
 
   const saveDocument = async () => {
     try {
+      // Send POST request to the backend for saving the note
       const response = await client.note.Save({
         text: content,
         cover_url: coverImage,
+        // If we have an id then we are updating an existing note, otherwise we are creating a new one
         id: queryParamID || uuidv4(),
       });
 
@@ -58,7 +67,7 @@ function App() {
       url.searchParams.set("id", response.id);
       window.history.pushState(null, "", url.toString());
 
-      // We now have an URL, we can show the sharing modal
+      // We now have saved note with an ID, we can now show the sharing modal
       setShowSharingModal(true);
     } catch (err) {
       console.error(err);

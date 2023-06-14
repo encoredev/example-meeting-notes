@@ -4,6 +4,9 @@ import { Dialog, Transition } from "@headlessui/react";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import Client, { pexels } from "../client.ts";
 
+/**
+ * A slide-over panel that allows the user to search for a cover image.
+ */
 const CoverSelector: FC<{
   open: boolean;
   setOpen: (isOpen: boolean) => void;
@@ -12,11 +15,13 @@ const CoverSelector: FC<{
 }> = ({ open, setOpen, setCoverImage, client }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  // The response from the Pexels image API, proxied through the Encore backend
   const [response, setResponse] = useState<pexels.SearchResponse | undefined>(
     undefined
   );
 
-  // Debounce the search so we don't make a request on every key stroke
+  // Debounce the search so that we don't make a request on every keystroke
   const debouncedResults = useMemo<
     (event: React.ChangeEvent<HTMLInputElement>) => void
   >(() => {
@@ -29,6 +34,7 @@ const CoverSelector: FC<{
     const search = async () => {
       setIsLoading(true);
       try {
+        // Fetch list of cover images that match the search query
         const response = await client.pexels.Search(searchQuery);
         setResponse(response);
       } catch (err) {
@@ -36,6 +42,7 @@ const CoverSelector: FC<{
       }
       setIsLoading(false);
     };
+    // If we have a search query then search, otherwise clear the response
     if (searchQuery.length) search();
     else setResponse(undefined);
   }, [searchQuery]);
@@ -125,7 +132,7 @@ const CoverSelector: FC<{
                               <img
                                 src={photo.src.medium}
                                 className="absolute inset-0 h-full w-full object-cover"
-                                alt={photo.photographer}
+                                alt={photo.alt}
                               />
                             </div>
                           ))}
