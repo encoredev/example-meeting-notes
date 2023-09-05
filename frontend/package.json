@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "generate_request_client:staging": "encore gen client meeting-notes-8ami --output=./src/client.ts --env=staging",
-    "generate_request_client:local": "encore gen client meeting-notes-8ami --output=./src/client.ts --env=local"
+    "generate-client:staging": "encore gen client meeting-notes-8ami --output=./src/client.ts --env=staging",
+    "generate-client:local": "encore gen client meeting-notes-8ami --output=./src/client.ts --env=local"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",

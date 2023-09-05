@@ -32,7 +32,7 @@ encore run
 # In a different terminal window, run the frontend
 cd frontend
 npm install
-npm run generate_request_client:local # Creates request client used to make requests to your backend
+npm run generate-client:local # Creates request client used to make requests to your backend
 npm run dev
 ```
 

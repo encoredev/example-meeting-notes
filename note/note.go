@@ -13,7 +13,7 @@ type Note struct {
 }
 
 //encore:api public method=POST path=/note
-func Save(ctx context.Context, note *Note) (*Note, error) {
+func SaveNote(ctx context.Context, note *Note) (*Note, error) {
 	// Save the note to the database.
 	// If the note already exists (i.e. CONFLICT), we update the notes text and the cover URL.
 	_, err := sqldb.Exec(ctx, `
@@ -31,7 +31,7 @@ func Save(ctx context.Context, note *Note) (*Note, error) {
 }
 
 //encore:api public method=GET path=/note/:id
-func Get(ctx context.Context, id string) (*Note, error) {
+func GetNote(ctx context.Context, id string) (*Note, error) {
 	note := &Note{ID: id}
 
 	// We use the note ID to query the database for the note's text and cover URL.

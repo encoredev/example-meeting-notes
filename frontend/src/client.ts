@@ -79,13 +79,13 @@ export namespace note {
             this.baseClient = baseClient
         }
 
-        public async Get(id: string): Promise<Note> {
+        public async GetNote(id: string): Promise<Note> {
             // Now make the actual call to the API
             const resp = await this.baseClient.callAPI("GET", `/note/${encodeURIComponent(id)}`)
             return await resp.json() as Note
         }
 
-        public async Save(params: Note): Promise<Note> {
+        public async SaveNote(params: Note): Promise<Note> {
             // Now make the actual call to the API
             const resp = await this.baseClient.callAPI("POST", `/note`, JSON.stringify(params))
             return await resp.json() as Note
@@ -100,13 +100,6 @@ export namespace pexels {
     export interface SearchResponse {
         photos: {
             id: number
-            width: number
-            height: number
-            url: string
-            photographer: string
-            "photographer_url": string
-            "photographer_id": number
-            "avg_color": string
             src: {
                 medium: string
                 landscape: string
@@ -122,7 +115,7 @@ export namespace pexels {
             this.baseClient = baseClient
         }
 
-        public async Search(_query: string): Promise<SearchResponse> {
+        public async SearchPhoto(_query: string): Promise<SearchResponse> {
             // Now make the actual call to the API
             const resp = await this.baseClient.callAPI("GET", `/images/${encodeURIComponent(_query)}`)
             return await resp.json() as SearchResponse

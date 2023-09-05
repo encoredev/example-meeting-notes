@@ -41,7 +41,7 @@ function App() {
       }
       try {
         // Fetch the note from the backend
-        const response = await client.note.Get(queryParamID);
+        const response = await client.note.GetNote(queryParamID);
         setCoverImage(response.cover_url || "");
         setContent(response.text || "");
       } catch (err) {
@@ -55,7 +55,7 @@ function App() {
   const saveDocument = async () => {
     try {
       // Send POST request to the backend for saving the note
-      const response = await client.note.Save({
+      const response = await client.note.SaveNote({
         text: content,
         cover_url: coverImage,
         // If we have an id then we are updating an existing note, otherwise we are creating a new one

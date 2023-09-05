@@ -2,7 +2,7 @@ import React, { FC, Fragment, useEffect, useMemo, useState } from "react";
 import debouce from "lodash.debounce";
 import { Dialog, Transition } from "@headlessui/react";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
-import Client, { pexels } from "../client.ts";
+import Client, { APIError, pexels } from "../client.ts";
 
 /**
  * A slide-over panel that allows the user to search for a cover image.
@@ -16,10 +16,11 @@ const CoverSelector: FC<{
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // The response from the Pexels image API, proxied through the Encore backend
+  // The response from the Pexels photo API, proxied through the Encore backend
   const [response, setResponse] = useState<pexels.SearchResponse | undefined>(
     undefined
   );
+  const [error, setError] = useState<APIError>();
 
   // Debounce the search so that we don't make a request on every keystroke
   const debouncedResults = useMemo<
@@ -33,12 +34,13 @@ const CoverSelector: FC<{
   useEffect(() => {
     const search = async () => {
       setIsLoading(true);
+      setError(undefined);
       try {
         // Fetch list of cover images that match the search query
-        const response = await client.pexels.Search(searchQuery);
+        const response = await client.pexels.SearchPhoto(searchQuery);
         setResponse(response);
       } catch (err) {
-        console.error(err);
+        setError(err as APIError);
       }
       setIsLoading(false);
     };
@@ -118,6 +120,9 @@ const CoverSelector: FC<{
                           Loading...
                         </span>
                       )}
+
+                      {error && <p className="text-red-500">{error.message}</p>}
+
                       {response && !isLoading && (
                         <div className="space-y-3">
                           <span className="text-sm">

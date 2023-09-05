@@ -3,6 +3,7 @@ package pexels
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -23,7 +24,7 @@ type SearchResponse struct {
 }
 
 //encore:api public method=GET path=/images/:query
-func Search(ctx context.Context, query string) (*SearchResponse, error) {
+func SearchPhoto(ctx context.Context, query string) (*SearchResponse, error) {
 	// Create a new http client to proxy the request to the Pexels API.
 	URL := "https://api.pexels.com/v1/search?query=" + query
 	client := &http.Client{}
@@ -38,6 +39,10 @@ func Search(ctx context.Context, query string) (*SearchResponse, error) {
 		return nil, err
 	}
 	defer res.Body.Close()
+
+	if res.StatusCode >= 400 {
+		return nil, fmt.Errorf("Pexels API error: %s", res.Status)
+	}
 
 	// Decode the data into the searchResponse struct.
 	var searchResponse *SearchResponse
