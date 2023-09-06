@@ -2,7 +2,7 @@
 
 # Meeting Notes
 
-### Tutorial article: <???>
+### Tutorial article: https://dev.to/encore/setting-up-a-free-production-ready-web-app-backend-in-go-with-database-in-less-than-100-lines-4ge4
 
 This is an example application (frontend + backend) for a Markdown Meeting Notes app.
 
