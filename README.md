@@ -8,6 +8,8 @@ This is an example application (frontend + backend) for a Markdown Meeting Notes
 
 Live demo: <https://encoredev.github.io/example-meeting-notes/>
 
+![Frontend](./images/demo.gif)
+
 The backend uses an SQL database to store meeting notes and has three API endpoints: 
 * `GET  /note/:id` - Retrieve a note by ID.
 * `POST /note` - Create a new note (or update an existing one).
@@ -32,13 +34,12 @@ encore run
 # In a different terminal window, run the frontend
 cd frontend
 npm install
-npm run generate-client:local # Creates request client used to make requests to your backend
 npm run dev
 ```
 
 ### Encore developer dashboard
 
-While `encore run` is running, open <http://localhost:4000/> to view Encore's local developer dashboard.
+While `encore run` is running, open <http://localhost:9400/> to view Encore's local developer dashboard.
 Here you can see the request you just made and a view a trace of the response.
 
 ## Deployment
