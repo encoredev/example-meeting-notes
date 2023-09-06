@@ -2,6 +2,8 @@
 
 # Meeting Notes
 
+### Tutorial article: <???>
+
 This is an example application (frontend + backend) for a Markdown Meeting Notes app.
 
 Live demo: <https://encoredev.github.io/example-meeting-notes/>
@@ -11,14 +13,12 @@ The backend uses an SQL database to store meeting notes and has three API endpoi
 * `POST /note` - Create a new note (or update an existing one).
 * `GET  /images/:query` - Search for images by using the [Pexels API](https://www.pexels.com/api/).
 
-The frontend is a React application...
-
 ## Developing locally
 
 When you have [installed Encore](https://encore.dev/docs/install), you can create a new Encore application and clone this example by running this command:
 
 ```bash
-encore app create my-app-name --example=meeting-notes
+encore app create meeting-notes --example=github.com/encoredev/example-meeting-notes
 ```
 
 ## Running
@@ -70,7 +70,3 @@ Your site should now be available at `https://<your-github-username>.github.io/<
 Pushing new code to GitHub will automatically update your site (see the GitHub actions workflow in the `.github` folder).
 
 Read more about GitHub pages here: <https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site>
-
-#### Using Vercel
-
-...
