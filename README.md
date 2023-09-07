@@ -6,7 +6,7 @@
 
 This is an example application (frontend + backend) for a Markdown Meeting Notes app.
 
-Live demo: <https://encoredev.github.io/example-meeting-notes/>
+Live demo: <https://encoredev.github.io/meeting-notes/>
 
 ![Frontend](./images/demo.gif)
 
